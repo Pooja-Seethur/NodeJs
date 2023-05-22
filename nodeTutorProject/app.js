@@ -8,6 +8,9 @@
     7. write own error handling middleware
     8. note: next() doesnot stop function execution unlike throw or return, so make sure to use return while using next()
     9. array.filter returns array where as array.find return only one element
+    10.inorder to convert address to lat long or get coordinates for address, we can use geolocation apis of google
+    https://developers.google.com/maps/documentation/geocoding/requests-geocoding
+
 */
 
 /**
@@ -42,7 +45,8 @@ app.use((error, req, res, next) => {
     if(res.headerSent){
         return next(error)      //*8
     }
-    res.status(500 || error.code).json({message:"An unknown error occured" || error.message})
+    console.log(error.message+" "+error.code)
+    res.status(error.code || 500).json({message:error.message || "An unknown error occured"})
 })
 
 app.listen(9876, ()=>{
