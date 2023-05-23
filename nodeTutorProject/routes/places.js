@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { check } = require('express-validator')
+const { check } = require('express-validator');
+//const checkAuthMiddleware = require('authmiddleware');
 
 //include controllers file where function logic is written
 const placeControllers = require('../controllers/placesController');
+
+/** For authorizing all the requests defined below **/
+//router.use(checkAuthMiddleware)
 
 //handle routes by specifying paths 
 //note: multiple middlewares can be added to the route handling function, executes from left to right

@@ -40,6 +40,7 @@ app.use((req, res, next) => {
     error.code = 404;
     throw error
 })
+
 //error handler middleware      //*7 
 app.use((error, req, res, next) => {
     if(res.headerSent){
