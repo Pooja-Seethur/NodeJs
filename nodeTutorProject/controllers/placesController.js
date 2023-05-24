@@ -1,5 +1,10 @@
 const { validationResult } = require('express-validator');
+const mongoose = require('mongoose')
+const places = require('../models/placeSchema');
 let users = [];
+const mongoUrl = "mongodb+srv://developer:6omO0EHyOc42U1Ow@apigateway0.lg5at1o.mongodb.net/tutorialDb?retryWrites=true&w=majority"
+
+mongoose.connect(mongoUrl)
 
 const placeById = (req, res, next) => {
     const varname = array.find(p => {
@@ -75,7 +80,24 @@ const login = (req, res, next) => {
     res.status(200).json({meesage: "Successfully logged in"})
 }
 
+const insertPlaceData = (req, res, next) => {
+    const{name, description} = req.body;
+    const newPlace = new places({
+        name: name,
+        description: description
+    })
+    newPlace.save()
+    .then((result) => {
+        console.log(result)
+        res.status(200).json({createdData: result})
+    })
+    .catch(error => {
+        res.status(200).json({message: 'error in handling data'})
+    })
+}
+
 exports.placeById = placeById;
 exports.userByName = userByName;
 exports.signUp = signUp;
 exports.login = login;
+exports.insertPlaceData = insertPlaceData;

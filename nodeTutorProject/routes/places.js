@@ -5,6 +5,7 @@ const { check } = require('express-validator');
 
 //include controllers file where function logic is written
 const placeControllers = require('../controllers/placesController');
+const mongoConnect = require('../controllers/mongoClient')
 
 /** For authorizing all the requests defined below **/
 //router.use(checkAuthMiddleware)
@@ -27,9 +28,9 @@ router.post('/byUserName',
 router.patch('/signUp',
     [
         check('emailId').notEmpty().normalizeEmail().isEmail(),
-        check('password').notEmpty().isLength({ min:4}),
+        check('password').notEmpty().isLength({ min: 4 }),
         check('userName').notEmpty()
-    ], 
+    ],
     placeControllers.signUp
 )
 router.post('/login',
@@ -39,6 +40,17 @@ router.post('/login',
     ],
     placeControllers.login
 )
+
+router.post('/insertData',
+    [
+        check('name').notEmpty(),
+        check('description').isLength({ max: 50 })
+    ],
+    //mongoConnect.createPlaces
+    placeControllers.insertPlaceData
+)
+
+router.get('/getData', mongoConnect.getDataFromDb)
 
 //make sure to export the router
 module.exports = router;

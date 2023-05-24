@@ -33,6 +33,7 @@ app.use(bodyParser.json())                              //parses body of json in
 const placeRoute = require('./routes/places')
 app.use('/placePath', placeRoute);
 
+
 //unsupported routes error handling
 
 app.use((req, res, next) => {
