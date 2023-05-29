@@ -50,3 +50,26 @@ store userid and token in local storage
 set take expiration time set in jwt and create new expiration time when login function is called, and store expiration time in localstorage too
 incase of auto login, even when the old session is active, refresh it by extending at that time
 verifying: if expiration time > token time
+
+
+//testing: jasmine
+
+install jasmine in npm terminal by following command:
+npm install --save -dev jasmine
+
+then run the command to create spec folder
+./node_modules/.bin/jasmine init 
+
+then inside package.json file under scripts change "test" command to "jasmine"
+
+create a specification file to write the test cases under specs folder server.sepc.js
+
+simple / sample test case:
+
+describe('calc', () => {
+    it('should multiply 2 and 2', () => {
+        expect(2*2).toBe(4)
+    })
+})
+
+to run script run npm test

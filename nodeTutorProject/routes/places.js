@@ -13,7 +13,10 @@ const mongoConnect = require('../controllers/mongoClient')
 //handle routes by specifying paths 
 //note: multiple middlewares can be added to the route handling function, executes from left to right
 
-router.get('/byPlaceId', placeControllers.placeById)
+router.post('/byPlaceId', [
+    check('placeId').notEmpty()
+],
+    placeControllers.placeById)
 
 //validation of incoming request. check express https://express-validator.github.io/docs/guides/getting-started
 
@@ -43,7 +46,7 @@ router.post('/login',
 
 router.post('/insertData',
     [
-        check('name').notEmpty(),
+        check('title').notEmpty(),
         check('description').isLength({ max: 50 })
     ],
     //mongoConnect.createPlaces
